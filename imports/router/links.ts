@@ -239,6 +239,7 @@ export async function handleOperation(operation: keyof typeof handlerOperations,
     const handlerTypeId = await deep.id('@deep-foundation/core', 'Handler');
     const handleOperationTypeId = await deep.id('@deep-foundation/core', handlerOperations[operation]);
     const dockerSupportsJsType = await deep.id('@deep-foundation/core', 'dockerSupportsJs');
+    const anyTypeId = await deep.id('@deep-foundation/core', 'Any');
 
     // log('handlerTypeId', handlerTypeId);
     // log('handleOperationTypeId', handleOperationTypeId);
