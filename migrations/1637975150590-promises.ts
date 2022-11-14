@@ -152,7 +152,7 @@ export const up = async () => {
     hasura_session json;
   BEGIN
     FOR HANDLE_INSERT IN
-      SELECT id FROM links WHERE "from_id" = link."type_id" AND "type_id" = ${handleInsertTypeId}
+      SELECT id FROM links WHERE ("from_id" = link."type_id" OR "from_id" = ${anyTypeId}) AND "type_id" = ${handleInsertTypeId};
     LOOP
       INSERT INTO links ("type_id") VALUES (${promiseTypeId}) RETURNING id INTO PROMISE;
       INSERT INTO links ("type_id", "from_id", "to_id") VALUES (${thenTypeId}, link."id", PROMISE);
