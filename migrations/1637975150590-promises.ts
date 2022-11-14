@@ -207,7 +207,7 @@ export const up = async () => {
     hasura_session json;
   BEGIN
     FOR HANDLE_DELETE IN
-      SELECT id FROM links WHERE "from_id" = OLD."type_id" AND "type_id" = ${handleDeleteTypeId}
+      SELECT id FROM links WHERE ("from_id" = OLD."type_id" OR "from_id" = ${anyTypeId}) AND "type_id" = ${handleDeleteTypeId}
     LOOP
       INSERT INTO links ("type_id") VALUES (${promiseTypeId}) RETURNING id INTO PROMISE;
       INSERT INTO links ("type_id", "from_id", "to_id") VALUES (${thenTypeId}, OLD."id", PROMISE);
