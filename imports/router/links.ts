@@ -250,7 +250,7 @@ export async function handleOperation(operation: keyof typeof handlerOperations,
           from_id: { _eq: ${dockerSupportsJsType} },
           type_id: { _eq: ${handlerTypeId} },
           in: {
-            from_id: { _eq: $typeId },
+            from_id: { _in: [$typeId, ${anyTypeId}] },
             type_id: { _eq: ${handleOperationTypeId} },
           }
         }
